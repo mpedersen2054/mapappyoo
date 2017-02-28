@@ -17,6 +17,13 @@ namespace mapapp.Controllers
         {
             _context = context;
         }
+
+
+        private double getLatFromAdr(string StreetAdr, string Zip)
+        {
+            
+        }
+
         // GET: /locations
         [HttpGet]
         [Route("locations/{lid:int}")]
