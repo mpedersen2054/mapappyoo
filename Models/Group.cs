@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace mapapp.Models
@@ -14,9 +13,6 @@ namespace mapapp.Models
         public int AdminId { get; set; }
 
         public string Description { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
         public List<UserGroup> Users {get; set;}
         public List<GroupLocation> Locations {get; set;}
         public Group(){

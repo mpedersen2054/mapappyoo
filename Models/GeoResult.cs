@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace mapapp.Models
 {
-    public class Location : BaseEntity
+    public class GeoResult
     {
         public int LocationId { get; set; }
 
@@ -22,15 +23,12 @@ namespace mapapp.Models
         public string GooglePlacesId { get; set; }
 
         public int CreatorId { get; set; }
+
+        
         public User Creator {get; set;}
         public List<Review> Users {get; set;}
         public List<GroupLocation> Groups {get; set;}
         public List<LocationCategory> Categories {get; set;}
-        public Location(){
-            Users = new List<Review>();
-            Groups = new List<GroupLocation>();
-            Categories = new List<LocationCategory>();
-            Creator = new User();
-        }
+        
     }
 }

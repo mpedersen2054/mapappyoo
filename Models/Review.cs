@@ -1,5 +1,3 @@
-using System;
-
 namespace mapapp.Models
 {
     public class Review : BaseEntity
@@ -15,8 +13,5 @@ namespace mapapp.Models
         public string Rating { get; set; }
 
         public string Message { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
 }

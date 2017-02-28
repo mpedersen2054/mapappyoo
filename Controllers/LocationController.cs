@@ -19,9 +19,10 @@ namespace mapapp.Controllers
         }
 
 
-        private double getLatFromAdr(string StreetAdr, string Zip)
+        private GeoResult getCoordsFromAdr(string StreetAdr, string City, string State)
         {
-            
+            string trimmedAdr = StreetAdr.Trim('.');
+            List<string> splitAdr = trimmedAdr.Split(' ');
         }
 
         // GET: /locations
@@ -68,9 +69,9 @@ namespace mapapp.Controllers
             {
                 
 
-                double newLat = getLatFromAdr(locModel.StreetAdr, locModel.Zip);
-                double newLng = getLngFromAdr(locModel.StreetAdr, locModel.Zip);
-                string gpId = getGPId(newLat, newLng);
+                var coords = getCoordsFromAdr(locModel.StreetAdr, locModel.Zip);
+                double newLat = coords.lat;
+                string gpId = 
 
                 Location newLoc = new Location{
                     Name = locModel.Name,
