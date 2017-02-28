@@ -26,6 +26,7 @@ namespace mapapp.Models
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public User Creator {get; set;}
         public List<Review> Users {get; set;}
         public List<GroupLocation> Groups {get; set;}
         public List<LocationCategory> Categories {get; set;}
@@ -33,6 +34,7 @@ namespace mapapp.Models
             Users = new List<Review>();
             Groups = new List<GroupLocation>();
             Categories = new List<LocationCategory>();
+            Creator = new User();
         }
     }
 }

@@ -30,7 +30,8 @@ namespace mapapp.Controllers
         [Route("locations/all")]
         public IActionResult ShowAllLocations()
         {
-            // List<Location> allLocs = _context.Locations.Include(u => u.)
+            //this returns a list of all locations along with each locations creator user obj and a list of all groups connected to that location
+            List<Location> allLocs = _context.Locations.OrderByDescending(l => l.CreatedAt).Include(u => u.Creator).Include(g => g.Groups).ToList();
             return View("AllLocations");
         }
 
@@ -75,7 +76,8 @@ namespace mapapp.Controllers
                     GooglePlacesId = gpId,
                     CreatorId = (int)HttpContext.Session.GetInt32("user"),
                     CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
+                    UpdatedAt = DateTime.Now,
+                    Creator = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault()
                 };
 
                 _context.Locations.Add(newLoc);
