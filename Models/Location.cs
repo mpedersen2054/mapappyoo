@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace mapapp.Models
@@ -23,9 +22,6 @@ namespace mapapp.Models
         public string GooglePlacesId { get; set; }
 
         public int CreatorId { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
         public User Creator {get; set;}
         public List<Review> Users {get; set;}
         public List<GroupLocation> Groups {get; set;}

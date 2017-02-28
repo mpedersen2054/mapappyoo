@@ -13,8 +13,5 @@ namespace mapapp.Models
         // FK = LocationId
         public int GroupLocId { get; set; }
         // gives us Location
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
 }

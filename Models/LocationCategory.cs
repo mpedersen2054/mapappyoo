@@ -1,5 +1,3 @@
-using System;
-
 namespace mapapp.Models
 {
     public class LocationCategory : BaseEntity
@@ -11,8 +9,5 @@ namespace mapapp.Models
 
         // gives up CategoryId
         public int LocCategoryId { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
 }

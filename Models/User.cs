@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 
 namespace mapapp.Models
 {
-    public abstract class BaseEntity {}
+    
     public class User : BaseEntity
     {
         public int UserId { get; set; }
@@ -18,9 +17,6 @@ namespace mapapp.Models
         public string ProfilePic { get; set; }
 
         public string Bio { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
         public List<UserGroup> Groups {get; set;}
         public List<Review> Locations {get; set;}
         public User(){
