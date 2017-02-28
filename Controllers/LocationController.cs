@@ -6,6 +6,7 @@ using mapapp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace mapapp.Controllers
 {
@@ -29,6 +30,7 @@ namespace mapapp.Controllers
         [Route("locations/all")]
         public IActionResult ShowAllLocations()
         {
+            // List<Location> allLocs = _context.Locations.Include(u => u.)
             return View("AllLocations");
         }
 
