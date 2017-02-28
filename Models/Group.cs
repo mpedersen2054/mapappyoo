@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace mapapp.Models
 {
@@ -16,5 +17,11 @@ namespace mapapp.Models
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public List<UserGroup> Users {get; set;}
+        public List<GroupLocation> Locations {get; set;}
+        public Group(){
+            Users = new List<UserGroup>();
+            Locations = new List<GroupLocation>();
+        }
     }
 }
