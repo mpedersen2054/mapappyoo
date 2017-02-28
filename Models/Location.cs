@@ -16,8 +16,8 @@ namespace mapapp.Models
 
         public string Zip { get; set; }
 
-        public int Lat { get; set; }
-        public int Lng { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
 
         public string GooglePlacesId { get; set; }
 
