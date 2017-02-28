@@ -18,5 +18,10 @@ namespace mapapp.ViewModels{
         [DataTypeAttribute(DataType.Password)]
         [CompareAttribute("password", ErrorMessage = "Passwords must match")]
         public string PasswordConfirmation {get; set;}
+        [RequiredAttribute(ErrorMessage="Please include a link to a profile picture.")]
+        public string ProfilePic {get; set;}
+        [RequiredAttribute(ErrorMessage="PLease include a bio.")]
+        [MinLengthAttribute(10, ErrorMessage="Bio must be at least 10 characters long.")]
+        public string Bio {get; set;}
     }
 }
