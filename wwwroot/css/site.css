@@ -51,6 +51,92 @@ h1,h2,h3,h4,h5,h6 {
 
 .group-container .descr {
     border-radius: 0 0 6px 6px;
-    padding: 10px 15px;
+    padding: 10px;
+    height: 60px;
+}
+
+
+/*
+=== Dashboard
+*/
+
+.dashboard .sidebar {
+    border: 1px solid #ccc;
+    height: 720px;
+    border-radius: 6px;
+}
+
+.dashboard .user-info {
+    /*height: 80px;*/
+    padding: 10px 20px;
+    /*border-bottom: 1px solid #ccc;*/
+}
+
+.user-info .user-thumbnail,
+.user-info .user-data {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.user-info .user-thumbnail {
+    margin-right: 25px;
+}
+
+.user-info .user-thumbnail img {
+    width: 60px;
+    height: 60px;
+}
+
+.user-info .user-data {
+    position: relative;
+    bottom: 6px;
+}
+
+.dashboard .group-info {
+    position: relative;
     height: 80px;
+    /*border-bottom: 1px solid #ccc;*/
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/escheresque_ste.png');
+}
+
+.dashboard .group-info h3 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+}
+
+
+.dashboard .main-data {}
+
+.main-data .nav-tabs li,
+.main-data .list-group-item,
+.nav-tabs.nav-justified>li>a {
+    border-radius: 0;
+}
+
+.main-data .nav-tabs li,
+.main-data .list-group-item {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: none;
+}
+
+.dashboard .group-users {}
+.dashboard .gu-user {}
+
+.dashboard .gu-user .gu-thumbnail {
+    margin: 0 20px 0 5px;
+}
+
+
+.dashboard .map-container {
+    height: 720px;
+}
+
+.dashboard .map {
+    border: 1px solid orange;
+    /*margin-right: 40px;*/
+    height: 100%;
+    border-radius: 6px;
 }
