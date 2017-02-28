@@ -7,16 +7,22 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace mapapp.Controllers
 {
     public class LocationController : Controller
     {
         private MyContext _context;
-        public LocationController(MyContext context)
+        private readonly string googleAPI;
+        public LocationController(MyContext context, APIKeyOptions apiKey)
         {
             _context = context;
+            googleAPI = apiKey.APIKey;
         }
+
+        
+
         // GET: /locations
         [HttpGet]
         [Route("locations/{lid:int}")]

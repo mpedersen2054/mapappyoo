@@ -31,6 +31,10 @@ namespace mapapp
             services.AddSession();
             services.Configure<MySqlOptions>(Configuration.GetSection("DBInfo"));
             services.AddDbContext<MyContext>(options => options.UseMySQL(Configuration["DBInfo:ConnectionString"]));
+            services.AddOptions();
+            services.Configure<APIKeyOptions>(Configuration.GetSection("APIKeys"));
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
