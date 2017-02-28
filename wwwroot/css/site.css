@@ -1,7 +1,56 @@
 
+h1,h2,h3,h4,h5,h6 {
+    padding: 0;
+    margin: 2px 0;
+}
+
 #map {
     /*width: 100%;*/
     height: 700px;
     max-height: 700px;
     border: 1px solid #aaa;
+}
+
+/*
+=== UserGroups
+*/
+
+.group-container {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.group-container .banner {
+    position: relative;
+    height: 160px;
+    border-bottom: 1px solid #ccc;
+    background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/escheresque_ste.png');
+    border-radius: 6px 6px 0 0;
+}
+
+.group-container .layover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 160px;
+}
+
+.group-container .layover a {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+}
+
+.group-container .layover h3 {
+    color: #fff;
+}
+
+.group-container .descr {
+    border-radius: 0 0 6px 6px;
+    padding: 10px 15px;
+    height: 80px;
 }
