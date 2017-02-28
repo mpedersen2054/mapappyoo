@@ -13,9 +13,11 @@ namespace mapapp.Controllers
     public class LocationController : Controller
     {
         private MyContext _context;
-        public LocationController(MyContext context)
+        private readonly string apiKey;
+        public LocationController(MyContext context, APIKeySettings apiKeySettings)
         {
             _context = context;
+            apiKey = apiKeySettings.APIKey;
         }
 
 
