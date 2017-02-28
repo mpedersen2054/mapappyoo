@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-namespace mappApp.Models
+
+namespace mapapp.Models
 {
     public class MyContext : DbContext
     {

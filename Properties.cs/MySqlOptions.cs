@@ -1,4 +1,4 @@
-namespace wishlist
+namespace mapapp
 {
     public class MySqlOptions
     {
