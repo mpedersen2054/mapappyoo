@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
-using Newtonsoft.Json;
 
 namespace mapapp.Controllers
 {
@@ -19,17 +17,13 @@ namespace mapapp.Controllers
             _context = context;
         }
 
-        // public void AddReview(Location currentLocation, User currentUser, )
-        // {
-
-        // }
-
         // GET: /locations
         [HttpGet]
         [Route("locations/{lid:int}")]
         public IActionResult ShowLocation(int lid)
         {
-            return View("Locations");
+            List<Location> currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Users).ToList();
+            return View("Locations", currentLoc);
         }
 
         // GET: /locations/all
