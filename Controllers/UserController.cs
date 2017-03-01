@@ -17,6 +17,21 @@ namespace mapapp.Controllers
         {
             _context = context;
         }
+
+        // GET: /users/login
+        [HttpGet]
+        [Route("users/login")]
+        public IActionResult ShowLogin(){
+            return View("ShowLogin");
+        }
+
+        // GET: /users/login
+        [HttpGet]
+        [Route("users/register")]
+        public IActionResult ShowRegister(){
+            return View("ShowRegister");
+        }
+        
         // POST: /login
         [HttpPost]
         [Route("login")]
@@ -31,13 +46,13 @@ namespace mapapp.Controllers
 
                     if(isInDB == null){
                         ViewBag.error = "This Username isn't registered. Please register.";
-                        return View("Register");
+                        return View("ShowRegister");
                     }
                     
                     HttpContext.Session.SetInt32("user", isInDB.UserId);
                     return RedirectToAction("Success");
                 }
-                return View("Login", loginModel);
+                return View("ShowLogin", loginModel);
             }
             return RedirectToAction("Success");
             
@@ -56,7 +71,7 @@ namespace mapapp.Controllers
 
                     if(isInDB != null){
                         ViewBag.error = "This email is already registered. Please log in.";
-                        return View("Login");
+                        return View("ShowLogin");
                     }
                     else{
                         PasswordHasher<RegisterViewModel> Hasher = new PasswordHasher<RegisterViewModel>();
@@ -79,7 +94,7 @@ namespace mapapp.Controllers
                     }
                     
                 }
-                return View("Register", regModel);
+                return View("ShowRegister", regModel);
             }
             return RedirectToAction("Success");
         }
