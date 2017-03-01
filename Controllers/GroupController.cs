@@ -44,11 +44,29 @@ namespace mapapp.Controllers
 
         // GET: /groups/{friendgroupId}/login
         [HttpGet]
-        [Route("groups/{gString}/login")]
-        public IActionResult ShowGroupLogin(string gString)
+        [Route("groups/{gid}/login")]
+        public IActionResult ShowGroupLogin(int gid)
         {
-            return View("GroupLogin");
+            
+            Group currentGroup = _context.Groups.Where(g => g.GroupId == gid).SingleOrDefault();
+
+            //check to see if the logged in user is already in the group
+            int? loggedIn = (int)HttpContext.Session.GetInt32(gid.ToString());
+            if((int)loggedIn == 1){
+                return RedirectToAction("ShowGroup", gid);
+            }
+            // if there is no password, set that group to the user's session
+            else if(currentGroup.Password == null){
+                HttpContext.Session.SetInt32(gid.ToString(), 1);
+                return RedirectToAction("ShowGroup", gid);
+            }
+            // otherwise display the group login page
+            else{
+                return View("GroupLogin", currentGroup);
+            }
         }
+
+        // POST: log into a group
 
         // GET: /groups/{friengroupId}
         [HttpGet]
