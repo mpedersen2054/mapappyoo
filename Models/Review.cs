@@ -6,11 +6,13 @@ namespace mapapp.Models
 
         // give us UserId
         public int ReviewerId { get; set; }
+        public User Reviewer {get; set;}
 
         // gives us LocationId
         public int RevieweeId { get; set; }
+        public Location Reviewee {get; set;}
 
-        public string Rating { get; set; }
+        public int Rating { get; set; }
 
         public string Message { get; set; }
     }
