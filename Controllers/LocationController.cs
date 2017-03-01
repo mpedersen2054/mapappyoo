@@ -55,51 +55,70 @@ namespace mapapp.Controllers
 
         //post: new location
         [HttpPostAttribute]
-        [RouteAttribute("addLocation")]
+        [RouteAttribute("locations/new")]
         public IActionResult AddLocation(LocationViewModel locModel)
         {
-            if (ModelState.IsValid)
-            {
+            System.Console.WriteLine("Name =>");
+            System.Console.WriteLine(locModel.Name);
+            System.Console.WriteLine("Street Adr =>");
+            System.Console.WriteLine(locModel.StreetAdr);
+            System.Console.WriteLine("City =>");
+            System.Console.WriteLine(locModel.City);
+            System.Console.WriteLine("State =>");
+            System.Console.WriteLine(locModel.State);
+            System.Console.WriteLine("Zip =>");
+            System.Console.WriteLine(locModel.Zip);
+            System.Console.WriteLine("Lat =>");
+            System.Console.WriteLine(locModel.Lat);
+            System.Console.WriteLine("Lng =>");
+            System.Console.WriteLine(locModel.Lng);
+            System.Console.WriteLine("GooglePlacesId =>");
+            System.Console.WriteLine(locModel.GooglePlacesId);
+
+            return RedirectToAction("AddLocation");
+
+            // if (ModelState.IsValid)
+            // {
                 
-                User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
-                Location newLoc = new Location{
-                    Name = locModel.Name,
-                    StreetAdr = locModel.StreetAdr,
-                    City = locModel.City,
-                    State = locModel.State,
-                    Zip = locModel.Zip,
-                    Lat = locModel.Lat,
-                    Lng = locModel.Lng,
-                    GooglePlacesId = locModel.GooglePlacesId,
-                    CreatorId = (int)HttpContext.Session.GetInt32("user"),
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    Creator = currentUser
-                };
+            //     User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
+            //     Location newLoc = new Location{
+            //         Name = locModel.Name,
+            //         StreetAdr = locModel.StreetAdr,
+            //         City = locModel.City,
+            //         State = locModel.State,
+            //         Zip = locModel.Zip,
+            //         Lat = locModel.Lat,
+            //         Lng = locModel.Lng,
+            //         GooglePlacesId = locModel.GooglePlacesId,
+            //         CreatorId = (int)HttpContext.Session.GetInt32("user"),
+            //         CreatedAt = DateTime.Now,
+            //         UpdatedAt = DateTime.Now,
+            //         Creator = currentUser
+            //     };
 
-                _context.Locations.Add(newLoc);
-                _context.SaveChanges();
-                Location currentLoc = _context.Locations.Last();
+            //     _context.Locations.Add(newLoc);
+            //     _context.SaveChanges();
+            //     Location currentLoc = _context.Locations.Last();
 
 
-                Review newReview = new Review{
-                    RevieweeId = currentLoc.LocationId,
-                    Reviewee = currentLoc,
-                    Rating = locModel.Rating,
-                    Message = locModel.Message,
-                    ReviewerId = currentUser.UserId,
-                    Reviewer = currentUser,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now
-                };
+            //     Review newReview = new Review{
+            //         RevieweeId = currentLoc.LocationId,
+            //         Reviewee = currentLoc,
+            //         Rating = locModel.Rating,
+            //         Message = locModel.Message,
+            //         ReviewerId = currentUser.UserId,
+            //         Reviewer = currentUser,
+            //         CreatedAt = DateTime.Now,
+            //         UpdatedAt = DateTime.Now
+            //     };
 
-                _context.Reviews.Add(newReview);
-                _context.SaveChanges();
+            //     _context.Reviews.Add(newReview);
+            //     _context.SaveChanges();
 
-                return RedirectToAction("ShowLocation", currentLoc.LocationId);
-            }
-            ViewBag.Error = "Please use a valid address.";
-            return View("ShowLocationNew", locModel);
+            //     return RedirectToAction("ShowLocation", currentLoc.LocationId);
+            // }
+            // ViewBag.Error = "Please use a valid address.";
+            // return View("ShowLocationNew", locModel);
         }
 
         //post: new review

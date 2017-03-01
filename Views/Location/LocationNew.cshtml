@@ -1,4 +1,6 @@
 
+@model mapapp.Models.Location
+
 <div class="container">
 
 <h2 class="page-header">Add new Location for Group XYZ</h2>
@@ -6,25 +8,28 @@
 <div class="row">
     <div class="col-md-6">
         <div class="well">
-            <form action="#" class="form">
+            <form asp-controller="Location" asp-action="AddLocation" class="form" id="new-loc-form" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Location name...">
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Location name...">
                 </div>
                 <hr>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Street Address...">
+                    <input type="text" asp-for="StreetAdr" class="form-control streetAdr-inp" placeholder="Street Address...">
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="City...">
+                            <input type="text" asp-for="City" class="form-control city-inp" placeholder="City...">
                         </div>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="State (IL)...">
+                            <input type="text" asp-for="State" class="form-control state-inp" placeholder="State (IL)...">
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" placeholder="Zip (60067)...">
+                            <input type="text" asp-for="Zip" class="form-control zip-inp" placeholder="Zip (60067)...">
                         </div>
+                        <input type="hidden" asp-for="Lat" class="lat-coord" name="Lat" value="">
+                        <input type="hidden" asp-for="Lng" class="lng-coord" name="Lng" value="">
+                        <input type="hidden" asp-for="GooglePlacesId" class="googlePlacesId" name="GooglePlacesId" value="">
                     </div>
                 </div>
                 <hr>
@@ -65,3 +70,5 @@
 </div>
 
 </div>
+
+<script src="~/js/newLocation.js"></script>

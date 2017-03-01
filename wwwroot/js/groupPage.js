@@ -1,7 +1,5 @@
 
-import something from './anotherfile'
-
-$(document).ready(() => {
+// var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 
 var map = L.map('map').setView([47.606438, -122.132453], 16);
 
@@ -12,6 +10,8 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 L.marker([47.606438, -122.132453]).addTo(map)
     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
     .openPopup();
+
+
 
 // console.log(map.getBounds())
 
@@ -32,5 +32,3 @@ map.on('move', function(e) {
 map.on('click', function(ev) {
     console.log(map); // ev is an event object (MouseEvent in this case)
 });
-
-})
