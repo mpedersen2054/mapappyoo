@@ -48,9 +48,16 @@ namespace mapapp.Controllers
                         ViewBag.error = "This Username isn't registered. Please register.";
                         return View("ShowRegister");
                     }
+                    var Hasher = new PasswordHasher<User>();
                     
-                    HttpContext.Session.SetInt32("user", isInDB.UserId);
-                    return RedirectToAction("Success");
+                    if(0 != Hasher.VerifyHashedPassword(isInDB, isInDB.Password, loginModel.Password))
+                    {
+                        HttpContext.Session.SetInt32("user", isInDB.UserId);
+                        return RedirectToAction("Success");
+                    }
+                    ViewBag.error = "Your password is incorrect.";
+                    return View("ShowLogin");
+                    
                 }
                 return View("ShowLogin", loginModel);
             }
@@ -58,7 +65,7 @@ namespace mapapp.Controllers
             
         }
 
-        // POST: /login
+        // POST: /register
         [HttpPost]
         [Route("register")]
         public IActionResult Register(RegisterViewModel regModel){
