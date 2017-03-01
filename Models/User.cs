@@ -18,10 +18,10 @@ namespace mapapp.Models
 
         public string Bio { get; set; }
         public List<UserGroup> Groups {get; set;}
-        public List<Review> Locations {get; set;}
+        public List<Review> Reviews {get; set;}
         public User(){
             Groups = new List<UserGroup>();
-            Locations = new List<Review>();
+            Reviews = new List<Review>();
         }
         
     }

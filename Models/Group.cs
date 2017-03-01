@@ -11,6 +11,7 @@ namespace mapapp.Models
         public string Password { get; set; }
 
         public int AdminId { get; set; }
+        public User Admin {get; set;}
 
         public string Description { get; set; }
         public List<UserGroup> Users {get; set;}
