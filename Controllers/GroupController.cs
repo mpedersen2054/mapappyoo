@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using mapapp.Models;
 using mapapp.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -91,7 +91,7 @@ namespace mapapp.Controllers
             {
                 
                 User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
-
+                
                 Group newGroup = new Group{
                     GroupName = groupModel.GroupName,
                     Description = groupModel.Description,
@@ -100,14 +100,17 @@ namespace mapapp.Controllers
                     UpdatedAt = DateTime.Now,
                     Admin = currentUser
                 };
-
+                //hash the password and add it if the group admin decided to create a password
                 if(groupModel.Password != null){
-                    newGroup.Password = groupModel.Password;
+                    PasswordHasher<GroupViewModel> Hasher = new PasswordHasher<GroupViewModel>();
+                    newGroup.Password = Hasher.HashPassword(groupModel, groupModel.Password);
                 }
 
                 _context.Groups.Add(newGroup);
                 _context.SaveChanges();
                 Group currentGroup = _context.Groups.Last();
+                //add created group to user session so they remain logged in
+                HttpContext.Session.SetInt32(currentGroup.GroupId.ToString(), 1);
 
 
                 return RedirectToAction("ShowGroup", currentGroup.GroupId);
