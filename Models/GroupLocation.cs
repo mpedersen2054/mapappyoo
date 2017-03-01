@@ -1,4 +1,3 @@
-using System;
 
 namespace mapapp.Models
 {
@@ -13,5 +12,6 @@ namespace mapapp.Models
         // FK = LocationId
         public int GroupLocId { get; set; }
         // gives us Location
+
     }
 }
