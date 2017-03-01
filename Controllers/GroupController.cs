@@ -6,6 +6,7 @@ using mapapp.Models;
 using mapapp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace mapapp.Controllers
 {
@@ -51,10 +52,15 @@ namespace mapapp.Controllers
 
         // GET: /groups/{friengroupId}
         [HttpGet]
-        [Route("groups/{gString}")]
-        public IActionResult ShowGroup(string gString)
+        [Route("groups/{gid:int}")]
+        public IActionResult ShowGroup(int gid)
         {
-            return View("Group");
+            List<Group> currentGroup = _context.Groups.Where(g => g.GroupId == gid)
+                .Include(a => a.Admin)
+                .Include(u => u.Users)
+                .Include(l => l.Locations).ToList();
+
+            return View("Group", currentGroup);
         }
         
 

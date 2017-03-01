@@ -22,7 +22,7 @@ namespace mapapp.Controllers
         [Route("locations/{lid:int}")]
         public IActionResult ShowLocation(int lid)
         {
-            List<Location> currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Users).ToList();
+            List<Location> currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).ToList();
             return View("Locations", currentLoc);
         }
 
