@@ -1,24 +1,22 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using mapapp.Models;
 using mapapp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace mapapp.Controllers
 {
     public class LocationController : Controller
     {
         private MyContext _context;
-        private readonly string googleAPI;
-        public LocationController(MyContext context, APIKeyOptions apiKey)
+        public LocationController(MyContext context)
         {
             _context = context;
-            googleAPI = apiKey.APIKey;
         }
 
 
@@ -26,7 +24,29 @@ namespace mapapp.Controllers
         private GeoResult getCoordsFromAdr(string StreetAdr, string City, string State)
         {
             string trimmedAdr = StreetAdr.Trim('.');
-            List<string> splitAdr = trimmedAdr.Split(' ');
+            string[] splitAdr = trimmedAdr.Split(' ');
+            string togetherAdr = "";
+            for(int i = 0; i < splitAdr.Length; i++){
+                togetherAdr = togetherAdr + splitAdr[i];
+                if(i < splitAdr.Length-1){
+                    togetherAdr = togetherAdr + "+";
+                }
+            }
+            string togetherCity = "";
+            string[] splitCity = City.Split(' ');
+            for(int i = 0; i < splitCity.Length; i++){
+                togetherCity = togetherCity + splitCity[i];
+                if(i < splitCity.Length-1){
+                    togetherCity = togetherCity + "+";
+                }
+            }
+            
+            // string requestUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={togetherAdr},+{togetherCity},+{State}&key={googleAPI}";
+            // var request = WebRequest.Create(requestUrl);
+            // var response = request.GetResponse();
+            // dynamic jObj = JsonConvert.DeserializeObject(response);
+
+            return new GeoResult();
         }
 
 
@@ -74,9 +94,7 @@ namespace mapapp.Controllers
             {
                 
 
-                var coords = getCoordsFromAdr(locModel.StreetAdr, locModel.Zip);
-                double newLat = coords.lat;
-                string gpId = 
+                GeoResult geoResult = getCoordsFromAdr(locModel.StreetAdr, locModel.City, locModel.State);
 
                 Location newLoc = new Location{
                     Name = locModel.Name,
@@ -84,9 +102,9 @@ namespace mapapp.Controllers
                     City = locModel.City,
                     State = locModel.State,
                     Zip = locModel.Zip,
-                    Lat = newLat,
-                    Lng = newLng,
-                    GooglePlacesId = gpId,
+                    Lat = geoResult.Lat,
+                    Lng = geoResult.Lng,
+                    GooglePlacesId = geoResult.GooglePlacesId,
                     CreatorId = (int)HttpContext.Session.GetInt32("user"),
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,

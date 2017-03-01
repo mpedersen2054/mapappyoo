@@ -7,6 +7,8 @@ namespace mapapp.Controllers
 {
     public class GroupController : Controller
     {
+        // private MyContext _context;
+        
         // GET: /groups
         [HttpGet]
         [Route("groups")]
