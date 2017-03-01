@@ -21,35 +21,6 @@ namespace mapapp.Controllers
 
 
 
-        private GeoResult getCoordsFromAdr(string StreetAdr, string City, string State)
-        {
-            string trimmedAdr = StreetAdr.Trim('.');
-            string[] splitAdr = trimmedAdr.Split(' ');
-            string togetherAdr = "";
-            for(int i = 0; i < splitAdr.Length; i++){
-                togetherAdr = togetherAdr + splitAdr[i];
-                if(i < splitAdr.Length-1){
-                    togetherAdr = togetherAdr + "+";
-                }
-            }
-            string togetherCity = "";
-            string[] splitCity = City.Split(' ');
-            for(int i = 0; i < splitCity.Length; i++){
-                togetherCity = togetherCity + splitCity[i];
-                if(i < splitCity.Length-1){
-                    togetherCity = togetherCity + "+";
-                }
-            }
-            
-            // string requestUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={togetherAdr},+{togetherCity},+{State}&key={googleAPI}";
-            // var request = WebRequest.Create(requestUrl);
-            // var response = request.GetResponse();
-            // dynamic jObj = JsonConvert.DeserializeObject(response);
-
-            return new GeoResult();
-        }
-
-
         // GET: /locations
         [HttpGet]
         [Route("locations/{lid:int}")]
@@ -94,17 +65,15 @@ namespace mapapp.Controllers
             {
                 
 
-                GeoResult geoResult = getCoordsFromAdr(locModel.StreetAdr, locModel.City, locModel.State);
-
                 Location newLoc = new Location{
                     Name = locModel.Name,
                     StreetAdr = locModel.StreetAdr,
                     City = locModel.City,
                     State = locModel.State,
                     Zip = locModel.Zip,
-                    Lat = geoResult.Lat,
-                    Lng = geoResult.Lng,
-                    GooglePlacesId = geoResult.GooglePlacesId,
+                    Lat = locModel.Lat,
+                    Lng = locModel.Lng,
+                    GooglePlacesId = locModel.GooglePlacesId,
                     CreatorId = (int)HttpContext.Session.GetInt32("user"),
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,

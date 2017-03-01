@@ -14,9 +14,12 @@ namespace mapapp.ViewModels{
         [RegularExpressionAttribute(@"^((AL)|(AK)|(AS)|(AZ)|(AR)|(CA)|(CO)|(CT)|(DE)|(DC)|(FM)|(FL)|(GA)|(GU)|(HI)|(ID)|(IL)|(IN)|(IA)|(KS)|(KY)|(LA)|(ME)|(MH)|(MD)|(MA)|(MI)|(MN)|(MS)|(MO)|(MT)|(NE)|(NV)|(NH)|(NJ)|(NM)|(NY)|(NC)|(ND)|(MP)|(OH)|(OK)|(OR)|(PW)|(PA)|(PR)|(RI)|(SC)|(SD)|(TN)|(TX)|(UT)|(VT)|(VI)|(VA)|(WA)|(WV)|(WI)|(WY))$", ErrorMessage = "Please enter the state in capital letters.")]
         public string State {get; set;}
         [RequiredAttribute(ErrorMessage="Please enter a zip code.")]
-        [MinLengthAttribute(5, ErrorMessage="Zip code must be 5 charachters.")]
-        [MaxLengthAttribute(5, ErrorMessage="Zip code must be 5 charachters.")]
+        [MinLengthAttribute(5, ErrorMessage="Zip code must be 5 characters.")]
+        [MaxLengthAttribute(5, ErrorMessage="Zip code must be 5 characters.")]
         public string Zip {get; set;}
+        public double Lat {get; set;}
+        public double Lng {get; set;}
+        public string GooglePlacesId {get; set;}
         
     }
 }
