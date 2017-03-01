@@ -67,6 +67,33 @@ namespace mapapp.Controllers
         }
 
         // POST: log into a group
+        [HttpPostAttribute]
+        [RouteAttribute("groups/{gid:int}/userlogin")]
+        public IActionResult GroupLogin(GroupLoginViewModel groupLoginModel, int gid)
+        {
+            Group currentGroup = _context.Groups.Where(g => g.GroupId == gid).SingleOrDefault();
+            if(currentGroup.Password == null){
+                if(groupLoginModel.Password == null){
+                    HttpContext.Session.SetInt32(gid.ToString(), 1);
+                    return RedirectToAction("ShowGroup", gid);
+                }else{
+                    ViewBag.error = "Your password was incorrect.";
+                    return View("GroupLogin", currentGroup);
+                }
+            }else{
+                var Hasher = new PasswordHasher<Group>();
+                    
+                if(0 != Hasher.VerifyHashedPassword(currentGroup, currentGroup.Password, groupLoginModel.Password))
+                {
+                    HttpContext.Session.SetInt32(gid.ToString(), 1);
+                    return RedirectToAction("ShowGroup", gid);
+                }
+                else{
+                    ViewBag.error = "Your password was incorrect.";
+                    return View("GroupLogin", currentGroup);
+                }
+            }
+        }
 
         // GET: /groups/{friengroupId}
         [HttpGet]
