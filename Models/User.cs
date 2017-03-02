@@ -17,8 +17,11 @@ namespace mapapp.Models
         public string ProfilePic { get; set; }
 
         public string Bio { get; set; }
+        
         public List<UserGroup> Groups {get; set;}
+
         public List<Review> Reviews {get; set;}
+
         public User(){
             Groups = new List<UserGroup>();
             Reviews = new List<Review>();

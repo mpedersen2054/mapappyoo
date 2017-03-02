@@ -5,9 +5,10 @@ namespace mapapp.Models
         public int LocationCategoryId { get; set; }
 
         // gives us LocationId
-        public int CatLocationId { get; set; }
+        public int LocReviewId { get; set; }
+        // public Location LocReview { get; set; }
 
         // gives up CategoryId
-        public int LocCategoryId { get; set; }
+        public int RevLocationId { get; set; }
     }
 }

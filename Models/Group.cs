@@ -14,11 +14,14 @@ namespace mapapp.Models
         public User Admin {get; set;}
 
         public string Description { get; set; }
-        public List<UserGroup> Users {get; set;}
-        public List<GroupLocation> Locations {get; set;}
+
+        public List<UserGroup> Members {get; set;}
+
+        public List<GroupLocation> GroupLocs {get; set;}
+        
         public Group(){
-            Users = new List<UserGroup>();
-            Locations = new List<GroupLocation>();
+            Members = new List<UserGroup>();
+            GroupLocs = new List<GroupLocation>();
         }
     }
 }

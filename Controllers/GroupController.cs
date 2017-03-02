@@ -97,14 +97,21 @@ namespace mapapp.Controllers
 
         // GET: /groups/{friengroupId}
         [HttpGet]
-        [Route("groups/{gid:int}")]
+        [Route("groups/{gid}")]
         public IActionResult ShowGroup(int gid)
         {
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid)
-                .Include(a => a.Admin)
-                .Include(u => u.Users)
-                .Include(l => l.Locations).First();
+                .Include(g => g.Admin)
+                .Include(g => g.Members)
+                .Include(g => g.GroupLocs)
+                .SingleOrDefault();
 
+            if (currentGroup == null)
+            {
+                return RedirectToAction("AddGroup");
+            }
+
+            ViewBag.Group = currentGroup;
             return View("Group", currentGroup);
         }
         
@@ -135,8 +142,7 @@ namespace mapapp.Controllers
                 //add created group to user session so they remain logged in
                 HttpContext.Session.SetInt32(currentGroup.GroupId.ToString(), 1);
 
-
-                return RedirectToAction("ShowGroup", currentGroup.GroupId);
+                return RedirectToAction("ShowGroup", new { gid = currentGroup.GroupId });
             }
             return View("GroupNew", groupModel);
         }

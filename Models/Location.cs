@@ -23,9 +23,13 @@ namespace mapapp.Models
 
         public int CreatorId { get; set; }
         public User Creator {get; set;}
+
         public List<Review> Reviews {get; set;}
+
         public List<GroupLocation> Groups {get; set;}
+
         public List<LocationCategory> Categories {get; set;}
+        
         public Location(){
             Reviews = new List<Review>();
             Groups = new List<GroupLocation>();
