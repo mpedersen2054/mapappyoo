@@ -7,32 +7,32 @@
 
 <div class="col-md-6">
     <div class="well">
-        <form action="" class="form">
+        <form asp-controller="User" asp-action="Register" method="POST" class="form">
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Full name...">
+                        <input type="text" class="form-control" placeholder="Full name..." asp-for="Name">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="Username...">
+                        <input type="text" class="form-control" placeholder="Username..." asp-for="Username">
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Email...">
+                <input type="text" class="form-control" placeholder="Email..." asp-for="Email">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Profile pic URL (http://sdada.com)...">
+                <input type="text" class="form-control" placeholder="Profile pic URL (http://sdada.com)..." asp-for="ProfilePic">
             </div>
             <div class="form-group">
-                <textarea class="form-control" placeholder="Bio..."></textarea>
+                <textarea class="form-control" placeholder="Bio..." asp-for="Bio"></textarea>
             </div>
             <hr>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Password...">
+                <input type="text" class="form-control" placeholder="Password..." asp-for="Password">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Password Confirmation...">
+                <input type="text" class="form-control" placeholder="Password Confirmation..." asp-for="PasswordConf">
             </div>
             <input type="submit" class="btn btn-block btn-primary" value="Register">
         </form>
