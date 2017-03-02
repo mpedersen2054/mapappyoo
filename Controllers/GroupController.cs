@@ -100,10 +100,10 @@ namespace mapapp.Controllers
         [Route("groups/{gid:int}")]
         public IActionResult ShowGroup(int gid)
         {
-            List<Group> currentGroup = _context.Groups.Where(g => g.GroupId == gid)
+            Group currentGroup = _context.Groups.Where(g => g.GroupId == gid)
                 .Include(a => a.Admin)
                 .Include(u => u.Users)
-                .Include(l => l.Locations).ToList();
+                .Include(l => l.Locations).First();
 
             return View("Group", currentGroup);
         }
