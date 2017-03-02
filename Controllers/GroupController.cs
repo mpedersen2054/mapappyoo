@@ -116,7 +116,7 @@ namespace mapapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
                 
                 Group newGroup = new Group{
