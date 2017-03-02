@@ -1,4 +1,6 @@
 
+@model mapapp.Models.Group
+
 <div class="container">
 
 <h2 class="page-header">Add new Group</h2>
@@ -6,15 +8,15 @@
 <div class="row">
     <div class="col-md-6">
         <div class="well">
-            <form action="#" class="form">
+            <form asp-controller="Group" asp-action="AddGroup" class="form" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name...">
+                    <input type="text" class="form-control" placeholder="Name..." asp-for="Name">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Password (optional)...">
+                    <input type="text" class="form-control" placeholder="Password (optional)..." asp-for="Password">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Description..."></textarea>
+                    <textarea class="form-control" placeholder="Description..." asp-for="Description"></textarea>
                 </div>
                 <input type="submit" class="btn btn-block btn-primary" value="Create">
             </form>
