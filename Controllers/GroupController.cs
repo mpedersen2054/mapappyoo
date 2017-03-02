@@ -21,7 +21,7 @@ namespace mapapp.Controllers
         // GET: /groups
         [HttpGet]
         [Route("groups")]
-        public IActionResult ShowUsergroups()
+        public IActionResult ShowUserGroups()
         {
             return View("UserGroups");
         }
