@@ -27,6 +27,14 @@ namespace mapapp.Controllers
 
         // GET: /users/login
         [HttpGet]
+        [Route("logout")]
+        public IActionResult Logout(){
+            HttpContext.Session.Clear();
+            return RedirectToAction("ShowLogin");
+        }
+
+        // GET: /users/login
+        [HttpGet]
         [Route("users/register")]
         public IActionResult ShowRegister(){
             return View("ShowRegister");
@@ -110,7 +118,7 @@ namespace mapapp.Controllers
         [RouteAttribute("success")]
         public IActionResult Success()
         {
-            return RedirectToAction("ShowUserGroups");
+            return RedirectToAction("ShowUserGroups", "Group");
         }
     }
 }

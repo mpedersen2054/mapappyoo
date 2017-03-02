@@ -115,17 +115,13 @@ namespace mapapp.Controllers
         public IActionResult AddGroup(GroupViewModel groupModel)
         {
             if (ModelState.IsValid)
-            {
-
-                User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
-                
+            {   
                 Group newGroup = new Group{
                     GroupName = groupModel.GroupName,
                     Description = groupModel.Description,
                     AdminId = (int)HttpContext.Session.GetInt32("user"),
                     CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
-                    Admin = currentUser
+                    UpdatedAt = DateTime.Now
                 };
                 //hash the password and add it if the group admin decided to create a password
                 if(groupModel.Password != null){
@@ -142,7 +138,7 @@ namespace mapapp.Controllers
 
                 return RedirectToAction("ShowGroup", currentGroup.GroupId);
             }
-            return RedirectToAction("AddGroup");
+            return View("GroupNew", groupModel);
         }
     }
 }
