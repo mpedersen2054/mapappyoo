@@ -113,6 +113,10 @@ namespace mapapp.Controllers
 
             User uzer = _context.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32("user"));
 
+            if (uzer == null)
+            {
+                return RedirectToAction("ShowLogin", "User");
+            }
 
             if (currentGroup == null)
             {
