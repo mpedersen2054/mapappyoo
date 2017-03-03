@@ -119,6 +119,7 @@ namespace mapapp.Controllers
         public IActionResult Success()
         {
             int? isInSession = HttpContext.Session.GetInt32("user");
+            System.Console.WriteLine(isInSession);
             if(isInSession == null){
                 return RedirectToAction("ShowLogin");
             }
