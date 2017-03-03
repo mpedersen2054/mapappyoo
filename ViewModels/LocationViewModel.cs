@@ -25,6 +25,7 @@ namespace mapapp.ViewModels{
         [RequiredAttribute(ErrorMessage="Please include a review.")]
         [MinLengthAttribute(20, ErrorMessage="Review must be at least 20 characters.")]
         public string Message { get; set; }
+        public int GroupId {get; set;}
         
     }
 }
