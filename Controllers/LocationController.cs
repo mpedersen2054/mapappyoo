@@ -182,33 +182,22 @@ namespace mapapp.Controllers
             return RedirectToAction("ShowLocation", new {lid = currentLoc.LocationId});
         }
 
-        [HttpPostAttribute]
-        [RouteAttribute("getGroupLocations")]
-        public IActionResult GetGroupLocations(int groupId)
+        [HttpGet]
+        [RouteAttribute("getGroupLocations/{groupId}")]
+        public JsonResult GetGroupLocations(int groupId)
         {
-            int? isInSession = HttpContext.Session.GetInt32("user");
-            if(isInSession == null){
-                return RedirectToAction("ShowLogin", "User");
-            }
-            Group Groupz = 
-                _context.Groups.Where(g => g.GroupId == groupId)
+            Group Groupz = _context.Groups.Where(g => g.GroupId == groupId)
                 .Include(g => g.GroupLocs)
+                .ThenInclude(gl => gl.GroupLoc)
                 .SingleOrDefault();
-            // Group Groupz = 
-            //     _context.Groups.Where(g => g.GroupId == groupId)
-            //     .Include(g => g.GroupLocs)
-            //         .ThenInclude(gl => gl.GroupLoc)
-            //     .SingleOrDefault();
 
-            // GroupLocation grpl = 
-            //     _context.GroupLocations.Where(gl => gl.LocGroupId == groupId)
-            //         .Include(gl => gl.GroupLoc)
-            //         .SingleOrDefault();
-            // return Json(new {
-            //     locations = Groupz.GroupLocs
-            // });
+            foreach(GroupLocation GroupLoc in Groupz.GroupLocs) {
+                    GroupLoc.GroupLoc.Groups = null;
+                    GroupLoc.LocGroup = null;
+            }
+            var json = JsonConvert.SerializeObject(Groupz);
 
-            return Json(Groupz);
+            return Json(json);
         }
     }
 }
