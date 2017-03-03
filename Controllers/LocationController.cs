@@ -22,6 +22,15 @@ namespace mapapp.Controllers
         [Route("locations/{lid}")]
         public IActionResult ShowLocation(int lid)
         {
+            Location ratingVals = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).SingleOrDefault();
+            int sumOfRatings = 0;
+            int totalRatings = 0;
+            foreach(var rating in ratingVals.Reviews){
+                sumOfRatings += rating.Rating;
+                totalRatings ++;
+            }
+            double locRating = (double)sumOfRatings / (double)totalRatings;
+            ViewBag.LocRating = Math.Round(locRating, 2);
             Location currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).SingleOrDefault();
             ViewBag.Location = currentLoc;
             return View("Location");
