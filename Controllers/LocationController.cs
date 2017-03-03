@@ -146,7 +146,7 @@ namespace mapapp.Controllers
                 _context.Reviews.Add(newReview);
                 _context.SaveChanges();
 
-                return RedirectToAction("ShowLocation", new {locId = currentLoc.LocationId});
+                return RedirectToAction("ShowLocation", new {lid = currentLoc.LocationId});
             }
             return View("ShowLocation", reviewModel);
         }
