@@ -192,7 +192,7 @@ namespace mapapp.Controllers
         }
 
         //post: new group
-        [HttpPostAttribute]
+        [HttpGetAttribute]
         [RouteAttribute("joinGroup/{groupId}")]
         public IActionResult JoinGroup(int groupId)
         {
