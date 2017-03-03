@@ -39,9 +39,11 @@ namespace mapapp.Controllers
             double locRating = (double)sumOfRatings / (double)totalRatings;
             ViewBag.LocRating = Math.Round(locRating, 2);
 
-            Location currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).SingleOrDefault();
-            
+            Location currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews)
+            .ThenInclude(u => u.Reviewer).SingleOrDefault();
+            List<Review> reviewList = currentLoc.Reviews;
             ViewBag.Location = currentLoc;
+            ViewBag.reviews = reviewList;
             return View("Location");
         }
 

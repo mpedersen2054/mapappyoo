@@ -9,8 +9,9 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h1>The Places Name</h1>
-        <h3>1331 W. Windhill Dr., Palatine IL 60067</h3>
+        <h1>@ViewBag.Location.Name</h1>
+        <h3>@ViewBag.Location.StreetAdr</h3>
+        <h3>@ViewBag.Location.City<span>,</span> @ViewBag.Location.State @ViewBag.Location.Zip</h3>
 
         <br>
         <hr>
@@ -22,9 +23,9 @@
         
         <ul class="list-group">
             
-            @foreach(var review in @ViewBag.currentLoc.Reviews)
+            @foreach(var review in @ViewBag.reviews)
             {
-                <li class="list-group-item">@review.Review</li>
+                <li class="list-group-item">-@review.Reviewer.Username <br/>Rating: @review.Rating <br/>@review.Message</li>
             }
         </ul>
 
