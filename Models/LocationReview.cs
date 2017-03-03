@@ -8,7 +8,7 @@ namespace mapapp.Models
         public int LocReviewId { get; set; }
         // public Location LocReview { get; set; }
 
-        // gives up CategoryId
+        // gives up Review
         public int RevLocationId { get; set; }
     }
 }

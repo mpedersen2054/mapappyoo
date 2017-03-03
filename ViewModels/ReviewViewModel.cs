@@ -4,6 +4,8 @@ namespace mapapp.ViewModels
 {
     public class ReviewViewModel
     {
+        public int LocationId { get; set; }
+
         [RequiredAttribute(ErrorMessage="You must include a rating.")]
         public int Rating { get; set; }
         [RequiredAttribute(ErrorMessage="Please include a review.")]

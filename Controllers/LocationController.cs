@@ -19,11 +19,12 @@ namespace mapapp.Controllers
 
         // GET: /locations
         [HttpGet]
-        [Route("locations/{lid:int}")]
+        [Route("locations/{lid}")]
         public IActionResult ShowLocation(int lid)
         {
             List<Location> currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).ToList();
-            return View("Locations", currentLoc);
+            ViewBag.Location = currentLoc;
+            return View("Location");
         }
 
         // GET: /locations/all
@@ -42,15 +43,6 @@ namespace mapapp.Controllers
         public IActionResult ShowLocationNew()
         {
             return View("LocationNew");
-        }
-
-
-        // GET: /locations/{locationId}
-        [HttpGet]
-        [Route("locations/{lid}")]
-        public IActionResult ShowGroup(int lid)
-        {
-            return View("Location");
         }
 
         //post: new location
@@ -101,11 +93,9 @@ namespace mapapp.Controllers
 
                 Review newReview = new Review{
                     RevieweeId = currentLoc.LocationId,
-                    Reviewee = currentLoc,
+                    ReviewerId = currentUser.UserId,
                     Rating = locModel.Rating,
                     Message = locModel.Message,
-                    ReviewerId = currentUser.UserId,
-                    Reviewer = currentUser,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
@@ -113,7 +103,9 @@ namespace mapapp.Controllers
                 _context.Reviews.Add(newReview);
                 _context.SaveChanges();
 
-                return RedirectToAction("ShowLocation", currentLoc.LocationId);
+                Review lastReview = _context.Reviews.Last();
+
+                return RedirectToAction("ShowLocation", new { lid = currentLoc.LocationId });
             }
             ViewBag.Error = "Please use a valid address.";
             return View("ShowLocationNew", locModel);
@@ -121,23 +113,21 @@ namespace mapapp.Controllers
 
         //post: new review
         [HttpPostAttribute]
-        [RouteAttribute("addReview/{locId:int}")]
-        public IActionResult AddReview(ReviewViewModel reviewModel, int locId)
+        [RouteAttribute("addReview")]
+        public IActionResult AddReview(ReviewViewModel reviewModel)
         {
             if (ModelState.IsValid)
             {
                 
                 User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
-                Location currentLoc = _context.Locations.Where(l => l.LocationId == locId).SingleOrDefault();
+                Location currentLoc = _context.Locations.Where(l => l.LocationId == reviewModel.LocationId).SingleOrDefault();
 
 
                 Review newReview = new Review{
                     RevieweeId = currentLoc.LocationId,
-                    Reviewee = currentLoc,
+                    ReviewerId = currentUser.UserId,
                     Rating = reviewModel.Rating,
                     Message = reviewModel.Message,
-                    ReviewerId = currentUser.UserId,
-                    Reviewer = currentUser,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
