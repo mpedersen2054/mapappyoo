@@ -2,7 +2,7 @@
 $(function() {
 
 function reqLocations(groupId, callback) {
-    $.post('/getGroupsLocations', { groupId: groupId }, function(data) {
+    $.post('/getGroupLocations', { groupId: groupId }, function(data) {
         console.log('INSIDE POST REQ!!!')
         console.log(data)
         callback(null, data)
