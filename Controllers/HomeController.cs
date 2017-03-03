@@ -8,11 +8,11 @@ namespace mapapp.Controllers
     public class HomeController : Controller
     {
         // GET: /Home/
-        [HttpGet]
-        [Route("")]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        // [HttpGet]
+        // [Route("")]
+        // public IActionResult Index()
+        // {
+        //     return View();
+        // }
     }
 }

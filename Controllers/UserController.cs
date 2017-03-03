@@ -18,6 +18,13 @@ namespace mapapp.Controllers
             _context = context;
         }
 
+
+        //get: send home route to login
+        [HttpGetAttribute]
+        [RouteAttribute("")]
+        public IActionResult Index(){
+            return RedirectToAction("ShowLogin");
+        }
         // GET: /users/login
         [HttpGet]
         [Route("users/login")]
