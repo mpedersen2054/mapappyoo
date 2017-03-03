@@ -126,8 +126,9 @@ namespace mapapp.Controllers
             }
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid)
                 .Include(g => g.Admin)
-                .Include(g => g.Members)
                 .Include(g => g.GroupLocs)
+                .Include(g => g.Members)
+                    .ThenInclude(m => m.Member)
                 .SingleOrDefault();
 
             User uzer = _context.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32("user"));
@@ -200,13 +201,18 @@ namespace mapapp.Controllers
                 return RedirectToAction("ShowLogin", "User");
             }
             User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
-            
-            UserGroup newUgroup = new UserGroup{
-                MemberId = currentUser.UserId,
-                OrganizationId = groupId
-            };
-            _context.UserGroups.Add(newUgroup);
-            _context.SaveChanges();
+
+            UserGroup isThere = _context.UserGroups.Where(ug => ug.MemberId == currentUser.UserId && ug.OrganizationId == groupId).SingleOrDefault();
+
+            if (isThere == null)
+            {
+                UserGroup newUgroup = new UserGroup{
+                    MemberId = currentUser.UserId,
+                    OrganizationId = groupId
+                };
+                _context.UserGroups.Add(newUgroup);
+                _context.SaveChanges();
+            }
 
             return RedirectToAction("ShowGroup", new {gid = groupId});
         }
