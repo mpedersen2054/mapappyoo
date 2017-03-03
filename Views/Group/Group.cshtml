@@ -115,4 +115,23 @@
 
 </div>
 
+@* this is for testing purposes only. please delete*@
+<div>
+    
+    <h3>admin</h3>
+    <p>@ViewBag.Group.Admin.Username</p>
+    <h3>locations</h3>
+    @{
+        foreach(var loc in @ViewBag.Group.GroupLocs){
+            <p>@loc.Name</p>
+        }
+    }
+    <h3>users</h3>
+    @{
+        foreach(var user in @ViewBag.Group.Members){
+            <p>@user.Member.Username</p>
+        }
+    }
+</div>
+
 <script src="~/js/groupPage.js"></script>

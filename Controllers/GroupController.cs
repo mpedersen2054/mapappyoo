@@ -23,6 +23,10 @@ namespace mapapp.Controllers
         [Route("groups")]
         public IActionResult ShowUserGroups()
         {
+            ViewBag.userGroups = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user"))
+            .Include(g => g.Groups)
+            .SingleOrDefault();
+
             return View("UserGroups");
         }
 
@@ -112,7 +116,7 @@ namespace mapapp.Controllers
             }
 
             ViewBag.Group = currentGroup;
-            return View("Group", currentGroup);
+            return View("Group");
         }
         
 
@@ -139,6 +143,13 @@ namespace mapapp.Controllers
                 _context.Groups.Add(newGroup);
                 _context.SaveChanges();
                 Group currentGroup = _context.Groups.Last();
+                //add current user to group Members
+                UserGroup addMem = new UserGroup{
+                    MemberId = (int)HttpContext.Session.GetInt32("user"),
+                    OrganizationId = (int)currentGroup.GroupId
+                };
+                _context.UserGroups.Add(addMem);
+                _context.SaveChanges();
                 //add created group to user session so they remain logged in
                 HttpContext.Session.SetInt32(currentGroup.GroupId.ToString(), 1);
 
