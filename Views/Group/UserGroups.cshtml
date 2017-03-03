@@ -1,81 +1,35 @@
 
 <div class="user-groups">
 
+@*test purposes*@
+
+<ul>
+    
+</ul>
+
 <div class="container">
 
 <h2 class="page-header">Your Groups</h2>
 
 <div class="row">
-    <div class="col-md-4">
-        <div class="group-container">
-            <div class="banner"></div>
-            <div class="layover">
-                <a href="#">
-                    <span class="user-cnt">113 users</span>
-                    <h3>Really cool kids</h3>
-                </a>
+    @foreach(var user in @ViewBag.userGroups){
+        foreach(var group in @user.Groups){
+            <div class="col-md-4">
+                <div class="group-container">
+                    <div class="banner"></div>
+                    <div class="layover">
+                        <a href="/groups/@group.Organization.GroupId">
+                            <span class="user-cnt">@group.Organization.Members.Count Members</span>
+                            <h3>@group.Organization.GroupName</h3>
+                        </a>
+                    </div>
+                    <div class="descr">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at optio in molestiae!
+                    </div>
+                </div>
             </div>
-            <div class="descr">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at optio in molestiae!
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="group-container">
-            <div class="banner"></div>
-            <div class="layover">
-                <a href="#">
-                    <span class="user-cnt">113 users</span>
-                    <h3>Really cool kids</h3>
-                </a>
-            </div>
-            <div class="descr">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at optio in molestiae!
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="group-container">
-            <div class="banner"></div>
-            <div class="layover">
-                <a href="#">
-                    <span class="user-cnt">113 users</span>
-                    <h3>Really cool kids</h3>
-                </a>
-            </div>
-            <div class="descr">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at optio in molestiae!
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="group-container">
-            <div class="banner"></div>
-            <div class="layover">
-                <a href="#">
-                    <span class="user-cnt">113 users</span>
-                    <h3>Really cool kids</h3>
-                </a>
-            </div>
-            <div class="descr">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at optio in molestiae!
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="group-container">
-            <div class="banner"></div>
-            <div class="layover">
-                <a href="#">
-                    <span class="user-cnt">113 users</span>
-                    <h3>Really cool kids</h3>
-                </a>
-            </div>
-            <div class="descr">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste at optio in molestiae!
-            </div>
-        </div>
-    </div>
+        }
+    }
 </div>
 
 <h2 class="page-header">Suggested Groups</h2>
@@ -228,13 +182,3 @@
 </div>
 
 </div>
-
-@*test purposes*@
-
-<ul>
-    @foreach(var user in ViewBag.userGroups){
-        foreach(var group in user.Groups){
-            <h1>@group.Organization</h1>
-        }
-    }
-</ul>

@@ -47,8 +47,8 @@ namespace mapapp.Controllers
 
         // GET: /locations/{locationId}
         [HttpGet]
-        [Route("locations/{locString}")]
-        public IActionResult ShowGroup(string locString)
+        [Route("locations/{lid}")]
+        public IActionResult ShowGroup(int lid)
         {
             return View("Location");
         }

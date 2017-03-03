@@ -19,7 +19,6 @@ namespace mapapp.Models
 
         public string Bio { get; set; }
         
-        [InverseProperty("Member")]
         public List<UserGroup> Groups {get; set;}
 
         public List<Review> Reviews {get; set;}
