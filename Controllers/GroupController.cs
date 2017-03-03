@@ -29,6 +29,12 @@ namespace mapapp.Controllers
                         .ThenInclude(g => g.Organization)
                         .ThenInclude(o => o.Members);
 
+            ViewBag.otherGroups = 
+                _context.Users.Where(u => u.UserId != (int)HttpContext.Session.GetInt32("user"))
+                    .Include(u => u.Groups)
+                        .ThenInclude(g => g.Organization)
+                        .ThenInclude(o => o.Members);
+
             return View("UserGroups");
         }
 
@@ -108,7 +114,7 @@ namespace mapapp.Controllers
             User uzer = _context.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32("user"));
 
 
-            if (currentGroup == null || uzer == null)
+            if (currentGroup == null)
             {
                 return RedirectToAction("AddGroup");
             }
