@@ -157,11 +157,12 @@ namespace mapapp.Controllers
             if(isInSession == null){
                 return RedirectToAction("ShowLogin", "User");
             }
+            Location currentLoc = _context.Locations.Where(l => l.LocationId == reviewModel.LocationId).SingleOrDefault();
             if (ModelState.IsValid)
             {
                 
                 User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
-                Location currentLoc = _context.Locations.Where(l => l.LocationId == reviewModel.LocationId).SingleOrDefault();
+                
 
 
                 Review newReview = new Review{
@@ -178,7 +179,7 @@ namespace mapapp.Controllers
 
                 return RedirectToAction("ShowLocation", new {lid = currentLoc.LocationId});
             }
-            return View("ShowLocation", reviewModel);
+            return RedirectToAction("ShowLocation", new {lid = currentLoc.LocationId});
         }
 
         [HttpGet]
