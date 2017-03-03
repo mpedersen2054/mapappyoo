@@ -46,7 +46,7 @@ h1,h2,h3,h4,h5,h6 {
 .group-container .descr {
     border-radius: 0 0 6px 6px;
     padding: 10px;
-    height: 60px;
+    /*height: 60px;*/
 }
 
 
