@@ -5,8 +5,6 @@
 
 <div class="dashboard">
 
-@ViewBag.currentGroup
-
 <!--<br>-->
 
 <div class="container-fluid">
@@ -24,81 +22,39 @@
         <div class="sidebar">
             <div class="user-info">
                 <div class="user-thumbnail">
-                    <img src="//placehold.it/60x60" class="img-circle">
+                    <img src="@ViewBag.CurrentUser.ProfilePic" class="img-circle">
                 </div>
                 <div class="user-data">
-                    <h4>Patmedersen</h4>
-                    <div>Matt Pedersen</div>
+                    <h4>@ViewBag.CurrentUser.Username</h4>
+                    <div>@ViewBag.CurrentUser.Name</div>
                 </div>
             </div>
             <div class="group-info">
                 <div class="lcnt">
-                    <h3>Really cool kids</h3>
+                    <h3>@ViewBag.Group.GroupName</h3>
                 </div>
             </div>
             <div class="main-data">
                 <ul class="nav nav-tabs nav-justified">
-                    <li role="presentation" class="active"><a href="#">Users (27)</a></li>
+                    <li role="presentation" class="active"><a href="#">Users ( @ViewBag.Group.Members.Count )</a></li>
                     <li role="presentation"><a href="#">Places (84)</a></li>
                 </ul>
                 <div class="group-users">
                     <ul class="list-group gu-user">
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                Patmedersen
-                            </span>
-                        </button>
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                MaxRoarSux
-                            </span>
-                        </button>
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                SamanCookieClickz
-                            </span>
-                        </button>
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                Alexstrasa
-                            </span>
-                        </button>
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                HelloKitty
-                            </span>
-                        </button>
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                Ed From Eddy
-                            </span>
-                        </button>
-                        <button type="button" class="list-group-item">
-                            <span class="gu-thumbnail">
-                                <img src="//placehold.it/30x30" class="img-circle">
-                            </span>
-                            <span class="gu-info">
-                                CowPerson123213
-                            </span>
-                        </button>
+
+
+                        @foreach (var member in @ViewBag.Group.Members)
+                        {
+                            <button type="button" class="list-group-item">
+                                <span class="gu-thumbnail">
+                                    <img src="@member.Member.ProfilePic" class="img-circle">
+                                </span>
+                                <span class="gu-info">
+                                    @member.Member.Username
+                                </span>
+                            </button>
+                        }
+
                     </ul>
                 </div>
             </div>

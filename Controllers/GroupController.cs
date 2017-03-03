@@ -23,19 +23,11 @@ namespace mapapp.Controllers
         [Route("groups")]
         public IActionResult ShowUserGroups()
         {
-            ViewBag.userGroups = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user"))
-            .Include(g => g.Groups)
-            .SingleOrDefault();
+            ViewBag.userGroups = 
+                _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user"))
+                    .Include(u => u.Groups);
 
             return View("UserGroups");
-        }
-
-        // GET: /groups/all
-        [HttpGet]
-        [Route("groups/all")]
-        public IActionResult ShowAllGroups()
-        {
-            return View("AllGroups");
         }
 
         // GET: /groups/new
@@ -107,15 +99,20 @@ namespace mapapp.Controllers
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid)
                 .Include(g => g.Admin)
                 .Include(g => g.Members)
+                    // .ThenInclude(m => m.)
                 .Include(g => g.GroupLocs)
                 .SingleOrDefault();
 
-            if (currentGroup == null)
+            User uzer = _context.Users.SingleOrDefault(u => u.UserId == HttpContext.Session.GetInt32("user"));
+
+
+            if (currentGroup == null || uzer == null)
             {
                 return RedirectToAction("AddGroup");
             }
 
             ViewBag.Group = currentGroup;
+            ViewBag.CurrentUser = uzer;
             return View("Group");
         }
         

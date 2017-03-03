@@ -16,7 +16,7 @@ namespace mapapp.Models
         public string Description { get; set; }
 
         public List<UserGroup> Members {get; set;}
-
+        
         public List<GroupLocation> GroupLocs {get; set;}
         
         public Group(){
