@@ -40,8 +40,9 @@ namespace mapapp.Controllers
         // GET: /locations/new
         [HttpGet]
         [Route("locations/new")]
-        public IActionResult ShowLocationNew()
+        public IActionResult ShowLocationNew(int groupId)
         {
+            ViewBag.gid = groupId;
             return View("LocationNew");
         }
 
@@ -101,6 +102,14 @@ namespace mapapp.Controllers
                 };
 
                 _context.Reviews.Add(newReview);
+                _context.SaveChanges();
+
+                GroupLocation newGLoc = new GroupLocation{
+                    LocGroupId = locModel.GroupId,
+                    GroupLocId = currentLoc.LocationId
+                };
+
+                _context.GroupLocations.Add(newGLoc);
                 _context.SaveChanges();
 
                 Review lastReview = _context.Reviews.Last();
