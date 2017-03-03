@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace mapapp.Controllers
 {
@@ -152,14 +153,27 @@ namespace mapapp.Controllers
         }
 
         [HttpPostAttribute]
-        [RouteAttribute("getGroupsLocations")]
-        public IActionResult GetGroupsLocations(int groupId)
+        [RouteAttribute("getGroupLocations")]
+        public IActionResult GetGroupLocations(int groupId)
         {
-            List<Group> Groupz = 
+            Group Groupz = 
                 _context.Groups.Where(g => g.GroupId == groupId)
                 .Include(g => g.GroupLocs)
-                    .ThenInclude(gl => gl.GroupLoc)
-                .ToList();
+                .SingleOrDefault();
+            // Group Groupz = 
+            //     _context.Groups.Where(g => g.GroupId == groupId)
+            //     .Include(g => g.GroupLocs)
+            //         .ThenInclude(gl => gl.GroupLoc)
+            //     .SingleOrDefault();
+
+            // GroupLocation grpl = 
+            //     _context.GroupLocations.Where(gl => gl.LocGroupId == groupId)
+            //         .Include(gl => gl.GroupLoc)
+            //         .SingleOrDefault();
+            // return Json(new {
+            //     locations = Groupz.GroupLocs
+            // });
+
             return Json(Groupz);
         }
     }
