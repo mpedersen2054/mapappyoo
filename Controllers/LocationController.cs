@@ -150,6 +150,17 @@ namespace mapapp.Controllers
             }
             return View("ShowLocation", reviewModel);
         }
-        
+
+        [HttpPostAttribute]
+        [RouteAttribute("getGroupsLocations")]
+        public IActionResult GetGroupsLocations(int groupId)
+        {
+            List<Group> Groupz = 
+                _context.Groups.Where(g => g.GroupId == groupId)
+                .Include(g => g.GroupLocs)
+                    .ThenInclude(gl => gl.GroupLoc)
+                .ToList();
+            return Json(Groupz);
+        }
     }
 }
