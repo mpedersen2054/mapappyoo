@@ -129,7 +129,7 @@ namespace mapapp.Controllers
         }
         
 
-        //post: new location
+        //post: new group
         [HttpPostAttribute]
         [RouteAttribute("addGroup")]
         public IActionResult AddGroup(GroupViewModel groupModel)
@@ -165,6 +165,23 @@ namespace mapapp.Controllers
                 return RedirectToAction("ShowGroup", new { gid = currentGroup.GroupId });
             }
             return View("GroupNew", groupModel);
+        }
+
+        //post: new group
+        [HttpPostAttribute]
+        [RouteAttribute("joinGroup/{groupId}")]
+        public IActionResult JoinGroup(int groupId)
+        {
+            User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
+            
+            UserGroup newUgroup = new UserGroup{
+                MemberId = currentUser.UserId,
+                OrganizationId = groupId
+            };
+            _context.UserGroups.Add(newUgroup);
+            _context.SaveChanges();
+
+            return RedirectToAction("ShowGroup", new {gid = groupId});
         }
     }
 }
