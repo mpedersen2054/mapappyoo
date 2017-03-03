@@ -8,8 +8,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="well">
+            @ViewBag.error
             <form asp-controller="Location" asp-action="AddLocation" class="form" id="new-loc-form" method="POST">
-                <input type="hidden" asp-for="GroupId" value="@ViewBag.groupId">
+                <input type="hidden" asp-for="GroupId" value="@ViewBag.gid">
                 <div class="form-group">
                     <input type="text" asp-for="Name" class="form-control" placeholder="Location name...">
                 </div>

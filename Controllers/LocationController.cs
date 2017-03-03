@@ -22,7 +22,7 @@ namespace mapapp.Controllers
         [Route("locations/{lid}")]
         public IActionResult ShowLocation(int lid)
         {
-            List<Location> currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).ToList();
+            Location currentLoc = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).SingleOrDefault();
             ViewBag.Location = currentLoc;
             return View("Location");
         }
@@ -39,7 +39,7 @@ namespace mapapp.Controllers
 
         // GET: /locations/new
         [HttpGet]
-        [Route("locations/new")]
+        [Route("locations/groups/{groupId:int}/new")]
         public IActionResult ShowLocationNew(int groupId)
         {
             ViewBag.gid = groupId;
@@ -67,6 +67,8 @@ namespace mapapp.Controllers
             System.Console.WriteLine(locModel.Lng);
             System.Console.WriteLine("GooglePlacesId =>");
             System.Console.WriteLine(locModel.GooglePlacesId);
+            System.Console.WriteLine("GroupId =>");
+            System.Console.WriteLine(locModel.GroupId);
 
             if (ModelState.IsValid)
             {
@@ -117,7 +119,7 @@ namespace mapapp.Controllers
                 return RedirectToAction("ShowLocation", new { lid = currentLoc.LocationId });
             }
             ViewBag.Error = "Please use a valid address.";
-            return View("ShowLocationNew", locModel);
+            return RedirectToAction("ShowLocationNew", new {groupId = locModel.GroupId});
         }
 
         //post: new review
@@ -144,9 +146,9 @@ namespace mapapp.Controllers
                 _context.Reviews.Add(newReview);
                 _context.SaveChanges();
 
-                return RedirectToAction("ShowLocation", currentLoc.LocationId);
+                return RedirectToAction("ShowLocation", new {locId = currentLoc.LocationId});
             }
-            return View("ShowLocationNew", reviewModel);
+            return View("ShowLocation", reviewModel);
         }
         
     }
