@@ -23,6 +23,10 @@ namespace mapapp.Controllers
         [Route("groups")]
         public IActionResult ShowUserGroups()
         {
+            ViewBag.userGroups = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user"))
+            .Include(g => g.Groups)
+            .SingleOrDefault();
+
             return View("UserGroups");
         }
 

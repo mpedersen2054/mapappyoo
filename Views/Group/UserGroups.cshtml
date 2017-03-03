@@ -228,3 +228,12 @@
 </div>
 
 </div>
+
+@*test purposes*@
+<ul>
+    @foreach(var user in ViewBag.userGroups){
+        foreach(var group in user.Groups){
+            <li>@group</li>
+        }
+    }
+</ul>
