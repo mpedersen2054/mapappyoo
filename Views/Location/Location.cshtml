@@ -5,8 +5,43 @@
 
 <div class="container">
 
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>The Places Name</h1>
+        <h3>1331 W. Windhill Dr., Palatine IL 60067</h3>
+
+        <br>
+        <hr>
+
+        <h3>Reviews for this Location:</h3>
+        <br>
+        <h4 class="text-success">Average Rating: @ViewBag.LocRating</h4>
+
+        
+        <ul class="list-group">
+            
+            @foreach(var review in @ViewBag.currentLoc.Reviews)
+            {
+                <li class="list-group-item">@review.Review</li>
+            }
+        </ul>
+
+    </div>
+    <div class="col-md-6">
+        <img class="location-place-img" src="//placehold.it/600x600" alt="">
+    </div>
+</div>
+
+</div>
+
+</div>
+
+
 <div class="row">
 
+@*
 <div class="col-md-6">
 
     <h1>HELLO LOCATION PAGE, MAKE ME PRETTY LATER</h1>
@@ -42,7 +77,4 @@
 </div>
 
 </div>
-
-</div>
-
-</div>
+*@
