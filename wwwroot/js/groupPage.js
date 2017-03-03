@@ -1,23 +1,6 @@
 
 $(function() {
 
-function reqLocations(groupId, callback) {
-    $.get('/getGroupLocations/' + groupId, function(data) {
-        console.log('INSIDE POST REQ!!!')
-        console.log(data)
-        callback(null, data)
-    })
-}
-
-reqLocations($('.group-id').data('groupid'), function(err, data) {
-    console.log('inside the CB!!!!')
-    console.log('err?', err)
-    console.log('data:')
-    console.log(JSON.parse(data))
-})
-
-
-
 var map = L.map('map').setView([47.606438, -122.132453], 16);
 
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -27,18 +10,43 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 L.marker([47.606438, -122.132453]).addTo(map)
     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
     .openPopup();
+// })
+
+
+function reqLocations(groupId, callback) {
+    $.get('/getGroupLocations/' + groupId, function(data) {
+        // console.log('INSIDE POST REQ!!!')
+        // console.log(data)
+        callback(null, data)
+    })
+}
+
+reqLocations($('.group-id').data('groupid'), function(err, data) {
+    var pData = JSON.parse(data)
+    var groupLocs = pData.GroupLocs
+
+    console.log(groupLocs)
+
+    for (var i = 0; i < groupLocs.length; i++) {
+        var curr = groupLocs[i].GroupLoc
+
+        var tmpl = `
+            <div className="popup">
+                <div class="popup-title">${curr.Name}</div>
+                <div class="popup-loc">${curr.StreetAdr}, ${curr.City} ${curr.Zip}</div>
+                <a href="/locations/${curr.LocationId}">View Page/Ratings</a>
+            </div>
+        `
+
+        L.marker([curr.Lat, curr.Lng]).addTo(map)
+            .bindPopup(tmpl)
+            .openPopup();
+        // })
+    }
+    // console.log(pData)
 })
 
-
-
-
-
-
-
-
-
-
-
+})
 // var moves = 0
 // var ticks = 0
 
