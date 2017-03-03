@@ -127,7 +127,6 @@ namespace mapapp.Controllers
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid)
                 .Include(g => g.Admin)
                 .Include(g => g.Members)
-                    // .ThenInclude(m => m.)
                 .Include(g => g.GroupLocs)
                 .SingleOrDefault();
 

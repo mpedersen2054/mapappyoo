@@ -31,6 +31,7 @@ namespace mapapp
             services.AddSession();
             services.Configure<MySqlOptions>(Configuration.GetSection("DBInfo"));
             services.AddDbContext<MyContext>(options => options.UseMySQL(Configuration["DBInfo:ConnectionString"]));
+            
             services.AddOptions();
             
             

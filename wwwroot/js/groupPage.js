@@ -2,7 +2,7 @@
 $(function() {
 
 function reqLocations(groupId, callback) {
-    $.post('/getGroupLocations', { groupId: groupId }, function(data) {
+    $.get('/getGroupLocations/' + groupId, function(data) {
         console.log('INSIDE POST REQ!!!')
         console.log(data)
         callback(null, data)
@@ -13,7 +13,7 @@ reqLocations($('.group-id').data('groupid'), function(err, data) {
     console.log('inside the CB!!!!')
     console.log('err?', err)
     console.log('data:')
-    console.log(data)
+    console.log(JSON.parse(data))
 })
 
 
