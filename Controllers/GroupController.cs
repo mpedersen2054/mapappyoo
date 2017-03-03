@@ -23,6 +23,10 @@ namespace mapapp.Controllers
         [Route("groups")]
         public IActionResult ShowUserGroups()
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             ViewBag.userGroups = 
                 _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user"))
                     .Include(u => u.Groups)
@@ -43,6 +47,10 @@ namespace mapapp.Controllers
         [Route("groups/new")]
         public IActionResult ShowGroupNew()
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             return View("GroupNew");
         }
 
@@ -51,6 +59,10 @@ namespace mapapp.Controllers
         [Route("groups/{gid}/login")]
         public IActionResult ShowGroupLogin(int gid)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid).SingleOrDefault();
 
@@ -75,6 +87,10 @@ namespace mapapp.Controllers
         [RouteAttribute("groups/{gid:int}/userlogin")]
         public IActionResult GroupLogin(GroupLoginViewModel groupLoginModel, int gid)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid).SingleOrDefault();
             if(currentGroup.Password == null){
                 if(groupLoginModel.Password == null){
@@ -104,6 +120,10 @@ namespace mapapp.Controllers
         [Route("groups/{gid}")]
         public IActionResult ShowGroup(int gid)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             Group currentGroup = _context.Groups.Where(g => g.GroupId == gid)
                 .Include(g => g.Admin)
                 .Include(g => g.Members)
@@ -134,6 +154,10 @@ namespace mapapp.Controllers
         [RouteAttribute("addGroup")]
         public IActionResult AddGroup(GroupViewModel groupModel)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             if (ModelState.IsValid)
             {   
                 Group newGroup = new Group{
@@ -172,6 +196,10 @@ namespace mapapp.Controllers
         [RouteAttribute("joinGroup/{groupId}")]
         public IActionResult JoinGroup(int groupId)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
             
             UserGroup newUgroup = new UserGroup{

@@ -118,6 +118,10 @@ namespace mapapp.Controllers
         [RouteAttribute("success")]
         public IActionResult Success()
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin");
+            }
             return RedirectToAction("ShowUserGroups", "Group");
         }
     }

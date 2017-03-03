@@ -22,6 +22,10 @@ namespace mapapp.Controllers
         [Route("locations/{lid}")]
         public IActionResult ShowLocation(int lid)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             Location ratingVals = _context.Locations.Where(l => l.LocationId == lid).Include(r => r.Reviews).SingleOrDefault();
             int sumOfRatings = 0;
             int totalRatings = 0;
@@ -41,6 +45,10 @@ namespace mapapp.Controllers
         [Route("locations/all")]
         public IActionResult ShowAllLocations()
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             //this returns a list of all locations along with each locations creator user obj and a list of all groups connected to that location
             List<Location> allLocs = _context.Locations.OrderByDescending(l => l.CreatedAt).Include(u => u.Creator).Include(g => g.Groups).ToList();
             return View("AllLocations");
@@ -51,6 +59,10 @@ namespace mapapp.Controllers
         [Route("locations/groups/{groupId:int}/new")]
         public IActionResult ShowLocationNew(int groupId)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             ViewBag.gid = groupId;
             return View("LocationNew");
         }
@@ -60,24 +72,28 @@ namespace mapapp.Controllers
         [RouteAttribute("locations/new")]
         public IActionResult AddLocation(LocationViewModel locModel)
         {
-            System.Console.WriteLine("Name =>");
-            System.Console.WriteLine(locModel.Name);
-            System.Console.WriteLine("Street Adr =>");
-            System.Console.WriteLine(locModel.StreetAdr);
-            System.Console.WriteLine("City =>");
-            System.Console.WriteLine(locModel.City);
-            System.Console.WriteLine("State =>");
-            System.Console.WriteLine(locModel.State);
-            System.Console.WriteLine("Zip =>");
-            System.Console.WriteLine(locModel.Zip);
-            System.Console.WriteLine("Lat =>");
-            System.Console.WriteLine(locModel.Lat);
-            System.Console.WriteLine("Lng =>");
-            System.Console.WriteLine(locModel.Lng);
-            System.Console.WriteLine("GooglePlacesId =>");
-            System.Console.WriteLine(locModel.GooglePlacesId);
-            System.Console.WriteLine("GroupId =>");
-            System.Console.WriteLine(locModel.GroupId);
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
+            // System.Console.WriteLine("Name =>");
+            // System.Console.WriteLine(locModel.Name);
+            // System.Console.WriteLine("Street Adr =>");
+            // System.Console.WriteLine(locModel.StreetAdr);
+            // System.Console.WriteLine("City =>");
+            // System.Console.WriteLine(locModel.City);
+            // System.Console.WriteLine("State =>");
+            // System.Console.WriteLine(locModel.State);
+            // System.Console.WriteLine("Zip =>");
+            // System.Console.WriteLine(locModel.Zip);
+            // System.Console.WriteLine("Lat =>");
+            // System.Console.WriteLine(locModel.Lat);
+            // System.Console.WriteLine("Lng =>");
+            // System.Console.WriteLine(locModel.Lng);
+            // System.Console.WriteLine("GooglePlacesId =>");
+            // System.Console.WriteLine(locModel.GooglePlacesId);
+            // System.Console.WriteLine("GroupId =>");
+            // System.Console.WriteLine(locModel.GroupId);
 
             if (ModelState.IsValid)
             {
@@ -136,6 +152,10 @@ namespace mapapp.Controllers
         [RouteAttribute("addReview")]
         public IActionResult AddReview(ReviewViewModel reviewModel)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             if (ModelState.IsValid)
             {
                 
@@ -164,6 +184,10 @@ namespace mapapp.Controllers
         [RouteAttribute("getGroupsLocations")]
         public IActionResult GetGroupsLocations(int groupId)
         {
+            int? isInSession = HttpContext.Session.GetInt32("user");
+            if(isInSession == null){
+                return RedirectToAction("ShowLogin", "User");
+            }
             List<Group> Groupz = 
                 _context.Groups.Where(g => g.GroupId == groupId)
                 .Include(g => g.GroupLocs)
