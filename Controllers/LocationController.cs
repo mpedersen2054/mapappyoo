@@ -18,6 +18,8 @@ namespace mapapp.Controllers
             _context = context;
         }
 
+
+        //TODO: set this to only return reviews from the specific group
         // GET: /locations individual location
         [HttpGet]
         [Route("locations/{lid}")]
@@ -83,24 +85,6 @@ namespace mapapp.Controllers
             if(isInSession == null){
                 return RedirectToAction("ShowLogin", "User");
             }
-            // System.Console.WriteLine("Name =>");
-            // System.Console.WriteLine(locModel.Name);
-            // System.Console.WriteLine("Street Adr =>");
-            // System.Console.WriteLine(locModel.StreetAdr);
-            // System.Console.WriteLine("City =>");
-            // System.Console.WriteLine(locModel.City);
-            // System.Console.WriteLine("State =>");
-            // System.Console.WriteLine(locModel.State);
-            // System.Console.WriteLine("Zip =>");
-            // System.Console.WriteLine(locModel.Zip);
-            // System.Console.WriteLine("Lat =>");
-            // System.Console.WriteLine(locModel.Lat);
-            // System.Console.WriteLine("Lng =>");
-            // System.Console.WriteLine(locModel.Lng);
-            // System.Console.WriteLine("GooglePlacesId =>");
-            // System.Console.WriteLine(locModel.GooglePlacesId);
-            // System.Console.WriteLine("GroupId =>");
-            // System.Console.WriteLine(locModel.GroupId);
 
             if (ModelState.IsValid)
             {
