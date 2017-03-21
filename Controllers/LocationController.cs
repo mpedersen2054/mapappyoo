@@ -18,7 +18,7 @@ namespace mapapp.Controllers
             _context = context;
         }
 
-        // GET: /locations
+        // GET: /locations individual location
         [HttpGet]
         [Route("locations/{lid}")]
         public IActionResult ShowLocation(int lid)
@@ -169,8 +169,6 @@ namespace mapapp.Controllers
                 
                 User currentUser = _context.Users.Where(u => u.UserId == (int)HttpContext.Session.GetInt32("user")).SingleOrDefault();
                 
-
-
                 Review newReview = new Review{
                     RevieweeId = currentLoc.LocationId,
                     ReviewerId = currentUser.UserId,
