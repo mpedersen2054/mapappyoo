@@ -57,7 +57,12 @@ h1,h2,h3,h4,h5,h6 {
 .dashboard .sidebar {
     border: 1px solid #ccc;
     height: 680px;
+    overflow: scroll;
     border-radius: 6px;
+}
+
+.dashboard .group-users {
+    overflow: scroll;
 }
 
 .dashboard .user-info {
