@@ -34,10 +34,8 @@ namespace mapapp.Controllers
                         .ThenInclude(o => o.Members);
 
             ViewBag.otherGroups = 
-                _context.Users.Where(u => u.UserId != (int)HttpContext.Session.GetInt32("user"))
-                    .Include(u => u.Groups)
-                        .ThenInclude(g => g.Organization)
-                        .ThenInclude(o => o.Members);
+                _context.Groups.Include(g => g.Members)
+                    .Where(g => (g.Members.FindIndex(users => users.MemberId == (int)HttpContext.Session.GetInt32("user"))) == -1);
 
             return View("UserGroups");
         }
